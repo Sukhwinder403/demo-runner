@@ -1,0 +1,32 @@
+name: Extended Self-Hosted Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-on-self-hosted:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Show Runner OS Info
+        run: |
+          echo "OS: $OSTYPE"
+          uname -a
+
+      - name: Print Working Directory
+        run: pwd
+
+      - name: List Files in Directory
+        run: ls -la
+
+      - name: Print Environment Variables
+        run: env
+
+      - name: Run Simple Python Script
+        run: |
+          echo "print('Hello from Python on Self-Hosted Runner!')" > test.py
+          python test.py
